@@ -28,6 +28,8 @@ export default function ChatListHeader() {
         setIsContextMenuVisible(false);
         router.push("/Admin");
       },
+    },
+    {
       name: "Logout",
       callBack: async () => {
         setIsContextMenuVisible(false);
@@ -35,6 +37,7 @@ export default function ChatListHeader() {
       },
     },
   ];
+  
 
   const handleAllContactsPage = () => {
     dispatch({ type: reducerCases.SET_ALL_CONTACTS_PAGE });
