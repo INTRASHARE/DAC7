@@ -21,6 +21,7 @@ model User {
   sentMessages Messages[] @relation("sentMessages")
   recievedMessages Messages[] @relation("recievedMessages")
   onBoarding Int @default(0)
+  isAdmin Int @default(0)
 }
 
 model Messages {

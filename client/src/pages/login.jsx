@@ -61,6 +61,10 @@ export default function Login() {
                 status: data.data.data.about,
               },
             });
+            //setting admin flag
+            const userIsAdmin = data.data.data.isAdmin === 1;
+            dispatch({ type: reducerCases.SET_IS_ADMIN, isAdmin: userIsAdmin });
+            
             router.push("/");
           }
         } else {

@@ -7,9 +7,9 @@ import { useRouter } from "next/router";
 import ContextMenu from "../common/ContextMenu";
 
 export default function ChatListHeader() {
-  const [{ userInfo }, dispatch] = useStateProvider();
+  const [{ userInfo, isAdmin }, dispatch] = useStateProvider();
   const router = useRouter();
-  const [contextMenuCordinates, setContextMenuCordinates] = useState({
+  const [contextMenuCoordinates, setContextMenuCoordinates] = useState({
     x: 0,
     y: 0,
   });
@@ -17,17 +17,21 @@ export default function ChatListHeader() {
 
   const showContextMenu = (e) => {
     e.preventDefault();
-    setContextMenuCordinates({ x: e.pageX, y: e.pageY });
+    setContextMenuCoordinates({ x: e.pageX, y: e.pageY });
     setIsContextMenuVisible(true);
   };
 
-  const contextMenuOptions = [
+  const openAdminPageInNewTab = () => {
+    // Open the Admin page in a new tab
+    window.open('/admin', '_blank');
+    setIsContextMenuVisible(false); 
+  };
+   
+  // Ensuring isAdmin is defined and accessible
+  const contextMenuOptions = isAdmin ? [
     {
       name: "Admin",
-      callBack: async () => {
-        setIsContextMenuVisible(false);
-        window.open("/Admin", "_blank");
-      },
+      callBack: openAdminPageInNewTab,
     },
     {
       name: "Logout",
@@ -36,8 +40,15 @@ export default function ChatListHeader() {
         router.push("/logout");
       },
     },
+  ] : [
+    {
+      name: "Logout",
+      callBack: async () => {
+        setIsContextMenuVisible(false);
+        router.push("/logout");
+      },
+    },
   ];
-  
 
   const handleAllContactsPage = () => {
     dispatch({ type: reducerCases.SET_ALL_CONTACTS_PAGE });
@@ -65,7 +76,7 @@ export default function ChatListHeader() {
             <ContextMenu
               key="contextMenu"
               options={contextMenuOptions}
-              cordinates={contextMenuCordinates}
+              coordinates={contextMenuCoordinates} // Corrected prop name to "coordinates"
               contextMenu={isContextMenuVisible}
               setContextMenu={setIsContextMenuVisible}
             />

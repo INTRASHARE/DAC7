@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import AuthRoutes from "./routes/AuthRoutes.js";
+import AdminRoutes from "./routes/AdminRoutes.js";
 import MessageRoutes from "./routes/MessageRoutes.js";
 import { Server } from "socket.io";
 
@@ -15,6 +16,7 @@ app.use("/uploads/recordings", express.static("uploads/recordings"));
 app.use("/uploads/images/", express.static("uploads/images"));
 
 app.use("/api/auth/", AuthRoutes);
+app.use("/api/admin/", AdminRoutes);
 app.use("/api/messages", MessageRoutes);
 
 const server = app.listen(process.env.PORT, () => {
