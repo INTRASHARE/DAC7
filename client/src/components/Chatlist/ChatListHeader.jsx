@@ -26,7 +26,7 @@ export default function ChatListHeader() {
       name: "Admin",
       callBack: async () => {
         setIsContextMenuVisible(false);
-        router.push("/Admin");
+        window.open("/Admin", "_blank");
       },
     },
     {
