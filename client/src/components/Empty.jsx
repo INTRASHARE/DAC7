@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import Lottie from "lottie-react";
-import animationdata from "../components/common/animation.json" ;
+import animationdata from "../components/common/emptyPageAnimation.json" ;
 
 function Empty() {
   return (
