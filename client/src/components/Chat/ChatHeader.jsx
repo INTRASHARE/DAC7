@@ -10,7 +10,7 @@ export default function ChatHeader() {
   const [{ userInfo, currentChatUser, onlineUsers }, dispatch] =
     useStateProvider();
 
-  const [contextMenuCordinates, setContextMenuCordinates] = useState({
+  const [contextMenucoordinates, setContextMenucoordinates] = useState({
     x: 0,
     y: 0,
   });
@@ -18,7 +18,7 @@ export default function ChatHeader() {
 
   const showContextMenu = (e) => {
     e.preventDefault();
-    setContextMenuCordinates({ x: e.pageX - 50, y: e.pageY + 20 });
+    setContextMenucoordinates({ x: e.pageX - 50, y: e.pageY + 20 });
     setIsContextMenuVisible(true);
   };
 
@@ -56,7 +56,7 @@ export default function ChatHeader() {
         {isContextMenuVisible && (
           <ContextMenu
             options={contextMenuOptions}
-            cordinates={contextMenuCordinates}
+            coordinates={contextMenucoordinates}
             contextMenu={isContextMenuVisible}
             setContextMenu={setIsContextMenuVisible}
           />

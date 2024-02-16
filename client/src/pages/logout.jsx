@@ -8,6 +8,7 @@ function Logout() {
   const router = useRouter();
 
   useEffect(() => {
+    const handleLogout = async () => {
     try {
       if (!socket || !userInfo) {
         router.push("/login");
@@ -18,13 +19,23 @@ function Logout() {
         type: reducerCases.SET_USER_INFO,
         userInfo: undefined,
       });
+
+      localStorage.removeItem("userInfo");
+
       router.push("/login");
 
     } catch (error) {
       console.error("Error fetching data:", error);
     }
 
-}, [socket]);
+  };
+  handleLogout();
+
+  return() =>{
+
+  };
+
+}, [socket, userInfo, dispatch, router]);
 
   return <div className="bg-conversation-panel-background"></div>;
 }

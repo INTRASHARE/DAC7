@@ -5,10 +5,13 @@ import { useRouter } from "next/router";
 import { reducerCases } from "@/context/constants";
 import { CHECK_USER_ROUTE } from "@/utils/ApiRoutes";
 
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
+//import Lottie from "lottie-react";
 import animationdata from "../components/common/animation.json";
 import { FaCircleUser } from "react-icons/fa6";
 import { FaLock } from "react-icons/fa";
+
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
 export default function Login() {
   const router = useRouter();
@@ -32,6 +35,8 @@ export default function Login() {
         console.log(data);
         if (data.data.status) {
           console.log("user exists");
+          
+          localStorage.setItem('userInfo', JSON.stringify(data.data.data));
 
           if(data.data.data.onBoarding == 0){
             console.log("First time onBoarding");
@@ -61,6 +66,10 @@ export default function Login() {
                 status: data.data.data.about,
               },
             });
+            //setting admin flag
+            const userIsAdmin = data.data.data.isAdmin === 1;
+            dispatch({ type: reducerCases.SET_IS_ADMIN, isAdmin: userIsAdmin });
+            
             router.push("/");
           }
         } else {

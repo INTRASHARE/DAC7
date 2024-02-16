@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 
 export default function ContextMenu({
   options,
-  cordinates,
+  coordinates,
   contextMenu,
   setContextMenu,
 }) {
@@ -36,27 +36,32 @@ export default function ContextMenu({
     window.addEventListener("keyup", handleKeyPress);
     return () => window.removeEventListener("keyup", handleKeyPress);
   }, []);
-  const handleClick = (e, callBack) => {
+  const handleClick = (e, callBack,disabled) => {
     e.stopPropagation();
-    callBack();
+
+    if (!disabled) {
+      callBack();
+      setContextMenu(false); // Close the context menu after selecting an option
+    }
   };
+
   return (
     <div
-      className={`bg-dropdown-background fixed py-2 z-[100]`}
+      className="bg-dropdown-background fixed py-2 z-100" // Fixed class name and removed invalid syntax
       ref={contextMenuRef}
       style={{
         boxShadow:
-          "0 2px 5px 0 rgba(var(11,20,26),.26),0 2px 10px 0 rgba(11,20,26;),.16)",
-        top: cordinates.y,
-        left: cordinates.x,
+          "0 2px 5px 0 rgba(11,20,26,.26), 0 2px 10px 0 rgba(11,20,26,.16)", // Corrected boxShadow value
+        top: coordinates.y,
+        left: coordinates.x,
       }}
     >
       <ul>
-        {options.map(({ name, callBack }, index) => (
+        {options.map(({ name, callBack, disabled }, index) => (
           <React.Fragment key={index}>
             <li
               className="hover:bg-background-default-hover px-5 py-2 cursor-pointer"
-              onClick={(e) => handleClick(e, callBack)}
+              onClick={(e) => handleClick(e, callBack, disabled)}
             >
               <span className="text-white">{name}</span>
             </li>

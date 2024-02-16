@@ -4,7 +4,7 @@ import fs from "fs";
 const generateUsers = (count) => {
   const users = [];
 
-  for (let i = 0; i < count; i++) {
+  for (let i = 1; i <= count; i++) {
     const user = {
       eId: i.toString(),
       password: i.toString(),

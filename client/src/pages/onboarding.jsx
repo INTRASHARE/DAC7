@@ -3,10 +3,7 @@ import Avatar from "../components/common/Avatar";
 import Input from "../components/common/Input";
 import axios from "axios";
 import { onBoardUserRoute } from "../utils/ApiRoutes";
-
 import Resizer from "react-image-file-resizer";
-
-import Image from "next/image";
 import { useStateProvider } from "@/context/StateContext";
 import { useRouter } from "next/router";
 import { reducerCases } from "@/context/constants";
@@ -25,9 +22,9 @@ export default function OnBoarding() {
 
   useEffect(() => {
 
-
-    if (!newUser && !userInfo?.email) router.push("/login");
-    else if (!newUser && userInfo?.email) router.push("/");
+    const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (!newUser && !storedUserInfo?.email) router.push("/login");
+    else if (!newUser && storedUserInfo?.email) router.push("/");
   }, [newUser, userInfo, router]);
 
   const resizeFile = (file) =>
@@ -50,11 +47,13 @@ export default function OnBoarding() {
     if (validateDetails()) {
       const email = userInfo?.email;
       const eId = userInfo?.eId;
+      const id = userInfo?.id;
       try {
         const base64Response = await fetch(`${image}`);
         const blob = await base64Response.blob();
         setImage(await resizeFile(blob));
         const { data } = await axios.post(onBoardUserRoute, {
+          id,
           eId,
 	  email,
           name,

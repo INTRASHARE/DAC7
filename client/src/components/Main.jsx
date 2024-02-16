@@ -31,15 +31,19 @@ export default function Main() {
   useEffect(() => {
     const redirectIfNotLoggedIn = async () => {
       try {
-        if (userInfo === undefined) {
+        const storedUserInfo = localStorage.getItem('userInfo');
+        if (!storedUserInfo || storedUserInfo === 'undefined') {
           await router.push("/login");
-        } else{
-          socket.current = io(HOST);
-          socket.current.emit("add-user", userInfo.id);
-          dispatch({ type: reducerCases.SET_SOCKET, socket });
-          setLoading(false);
-        }
+          return;
+        } 
 
+        const parsedUserInfo = JSON.parse(storedUserInfo);
+        dispatch({ type: reducerCases.SET_USER_INFO, userInfo: parsedUserInfo });
+
+          setLoading(false);
+          socket.current = io(HOST);
+          socket.current.emit("add-user", parsedUserInfo.id);
+          dispatch({ type: reducerCases.SET_SOCKET, socket });
 
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -47,7 +51,7 @@ export default function Main() {
     };
 
     redirectIfNotLoggedIn();
-  }, [userInfo]);
+  }, []);
 
   useEffect(() => {
     if (socket.current && !socketEvent) {

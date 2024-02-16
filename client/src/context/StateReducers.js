@@ -12,6 +12,7 @@ export const initialState = {
   onlineUsers: [],
   contactSearch: "",
   filteredContacts: [],
+  isAdmin:false,
 };
 
 const reducer = (state, action) => {
@@ -238,7 +239,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         onlineUsers: action.onlineUsers,
-      };
+    };
 
     case reducerCases.SET_CONTACT_SEARCH: {
       const filteredContacts = state.userContacts.filter((contact) =>
@@ -250,6 +251,11 @@ const reducer = (state, action) => {
         filteredContacts,
       };
     }
+    case reducerCases.SET_IS_ADMIN:
+      return {
+        ...state,
+        isAdmin: action.isAdmin,
+      };
     default:
       return state;
   }
