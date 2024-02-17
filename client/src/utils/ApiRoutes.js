@@ -2,13 +2,12 @@ export const HOST = "http://localhost:3005";
 
 const authRoute = `${HOST}/api/auth`;
 const MESSAGES_ROUTE = `${HOST}/api/messages`;
-const adminRoute = `${HOST}/api/admin`;
 
-export const deleteUserRoute = `${adminRoute}/deleteUser`;
-export const updateUserRoute = `${adminRoute}/updateUser`;
+export const deleteUserRoute = `${authRoute}/deleteUser`;
+export const updateUserRoute = `${authRoute}/updateUser`;
 
 
-export const getAllUsers = `${adminRoute}/getAllUsers`;
+export const getAllUsers = `${authRoute}/getAllUsers`;
 export const onBoardUserRoute = `${authRoute}/onboarduser`;
 export const CHECK_USER_ROUTE = `${authRoute}/check-user`;
 export const GET_ALL_CONTACTS = `${authRoute}/get-contacts`;

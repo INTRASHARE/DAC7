@@ -32,7 +32,7 @@ export default function Login() {
 
       if (eId && password) {
         const data = await axios.post(CHECK_USER_ROUTE, { eId, password });
-        console.log(data);
+        console.log("data from check user", data);
         if (data.data.status) {
           console.log("user exists");
           
@@ -50,6 +50,7 @@ export default function Login() {
                 name: data.data.data.name,
                 profilePicture: data.data.data.profilePicture,
                 status: "available",
+                isAdmin: data.data.data.isAdmin
               },
             });
            router.push("/onboarding");
@@ -64,11 +65,9 @@ export default function Login() {
                 name: data.data.data.name,
                 profilePicture: data.data.data.profilePicture,
                 status: data.data.data.about,
+                isAdmin: data.data.data.isAdmin
               },
             });
-            //setting admin flag
-            const userIsAdmin = data.data.data.isAdmin === 1;
-            dispatch({ type: reducerCases.SET_IS_ADMIN, isAdmin: userIsAdmin });
             
             router.push("/");
           }

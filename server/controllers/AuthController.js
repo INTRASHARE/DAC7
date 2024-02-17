@@ -10,6 +10,7 @@ export const checkUser = async (request, response, next) => {
         const prisma = getPrismaInstance();
         const user = await prisma.user.findFirst({ where: { eId, password } });
 
+        console.log("user in server ", user);
         if (!user) {
             return response.json({ msg: "User not found", status: false });
         } else {
@@ -63,38 +64,4 @@ export const getAllUsers = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
-
-// Route handler to update a user
-export const updateUser = async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const userData = req.body;
-
-        const prisma = getPrismaInstance();
-        const updatedUser = await prisma.user.update({
-            where: { id: parseInt(id) },
-            data: userData,
-        });
-
-        return res.json(updatedUser);
-    } catch (error) {
-        next(error);
-    }
-};
-
-// Route handler to delete a user
-export const deleteUser = async (req, res, next) => {
-    try {
-        const { id } = req.params;
-
-        const prisma = getPrismaInstance();
-        await prisma.user.delete({
-            where: { id: parseInt(id) },
-        });
-
-        return res.json({ message: "User deleted successfully" });
-    } catch (error) {
-        next(error);
-    }
 };

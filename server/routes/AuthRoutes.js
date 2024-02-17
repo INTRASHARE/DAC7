@@ -1,11 +1,16 @@
 import { Router } from "express";
 import {
   checkUser,
-  deleteUser,
   getAllUsers,
-  onBoardUser,
-  updateUser
+  onBoardUser
 } from "../controllers/AuthController.js";
+
+import {
+  AdminGetAllUsers,
+  updateUser,
+  deleteUser
+
+} from "../controllers/AdminController.js"
 
 const router = Router();
 
@@ -18,10 +23,13 @@ router.post("/onBoardUser", onBoardUser);
 // Route to get all users
 router.get("/get-contacts", getAllUsers);
 
-// Route to delete users
-router.delete("/deleteUser/:id", deleteUser);
+// Route handler to fetch all users
+router.get('/getAllUsers', AdminGetAllUsers);
 
-// Route to update users
-router.put("/updateUser/:id", updateUser);
+// Route handler to update a user
+router.put('/updateUser/:id', updateUser);
+
+// Route handler to delete a user
+router.delete('/deleteUser/:id',deleteUser);
 
 export default router;

@@ -11,8 +11,12 @@ const AdminContainer = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(getAllUsers);
-      setUsers(response.data);
+      const {
+        data: { users },
+      } = await axios.get(getAllUsers);
+
+      setUsers(users);
+
     } catch (error) {
       console.error('Error fetching users:', error);
     }
@@ -51,7 +55,6 @@ const AdminContainer = () => {
       console.error('Error deleting user:', error);
     }
   };
-  
 
   return (
     <div className="container mx-auto mt-8 text-white">
@@ -66,6 +69,7 @@ const AdminContainer = () => {
           </tr>
         </thead>
         <tbody>
+
           {users.map(user => (
             <tr key={user.eId} className="border-b py-2">
               <td className="text-left px-2">{user.eId}</td>

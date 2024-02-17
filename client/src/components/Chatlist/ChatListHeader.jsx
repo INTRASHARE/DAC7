@@ -7,7 +7,8 @@ import { useRouter } from "next/router";
 import ContextMenu from "../common/ContextMenu";
 
 export default function ChatListHeader() {
-  const [{ userInfo, isAdmin }, dispatch] = useStateProvider();
+  const [{ userInfo }, dispatch] = useStateProvider();
+  const isAdmin = userInfo.isAdmin;
   const router = useRouter();
   const [contextMenuCoordinates, setContextMenuCoordinates] = useState({
     x: 0,
@@ -26,8 +27,6 @@ export default function ChatListHeader() {
     window.open('/admin', '_blank');
     setIsContextMenuVisible(false); 
   };
-
-  console.log("isAdmin",isAdmin);
    
   // Ensuring isAdmin is defined and accessible
   const contextMenuOptions = isAdmin ? [
