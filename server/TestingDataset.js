@@ -10,7 +10,7 @@ const generateUsers = (count) => {
       password: i.toString(),
       email: faker.internet.email(),
       name: faker.name.findName(),
-      profilePicture: "",
+      profilePicture: "/default_avatar.png",
       about: faker.lorem.sentence(),
     };
 

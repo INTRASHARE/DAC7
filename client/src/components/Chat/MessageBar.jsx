@@ -184,7 +184,7 @@ export default function MessageBar() {
                 className="text-panel-header-icon cursor-pointer text-xl"
                 title="Record"
                 onClick={() => setShowAudioRecorder(true)}
-              />
+              /> 
             )}
           </div>
         </>

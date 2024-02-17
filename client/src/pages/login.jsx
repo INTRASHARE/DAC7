@@ -48,7 +48,7 @@ export default function Login() {
                 eId: data.data.data.eId,
                 email: data.data.data.email,
                 name: data.data.data.name,
-                profileImage: data.data.data.profilePicture,
+                profilePicture: data.data.data.profilePicture,
                 status: "available",
               },
             });
@@ -62,7 +62,7 @@ export default function Login() {
                 eId: data.data.data.eId,
                 email: data.data.data.email,
                 name: data.data.data.name,
-                profileImage: data.data.data.profilePicture,
+                profilePicture: data.data.data.profilePicture,
                 status: data.data.data.about,
               },
             });

@@ -55,24 +55,34 @@ export default function OnBoarding() {
         const { data } = await axios.post(onBoardUserRoute, {
           id,
           eId,
-	  email,
+	        email,
           name,
           about,
           image,
         });
         if (data.status) {
           dispatch({ type: reducerCases.SET_NEW_USER, newUser: false });
-          dispatch({
+          await dispatch({
             type: reducerCases.SET_USER_INFO,
             userInfo: {
               id,
               eId,
               name,
               email,
-              profileImage: image,
+              profilePicture : image,
               status: about,
             },
           });
+
+          localStorage.setItem('userInfo', JSON.stringify({     
+            id,
+            eId,
+            name,
+            email,
+            profilePicture : image,
+            status: about,}));
+          console.log("userinfo", userInfo);
+          console.log("localstogare", localStorage.userInfo);
 
           router.push("/");
         }

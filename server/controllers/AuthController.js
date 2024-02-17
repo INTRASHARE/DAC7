@@ -22,9 +22,10 @@ export const checkUser = async (request, response, next) => {
 
 export const onBoardUser = async (request, response, next) => {
     try {
-        const { eId, name, about = "Available", profilePicture } = request.body;
+        const { eId, name, about = "Available", image:profilePicture } = request.body;
         const prisma = getPrismaInstance();
 
+        console.log(request.body);
         await prisma.user.update({
             where: { eId: eId },
             data: { name, about, profilePicture, onBoarding: 1 }

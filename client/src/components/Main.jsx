@@ -22,6 +22,8 @@ export default function Main() {
     },
     dispatch,
   ] = useStateProvider(); 
+
+  console.log("userinfo on main page", userInfo);
   
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -36,6 +38,8 @@ export default function Main() {
           await router.push("/login");
           return;
         } 
+
+        console.log("storedUserInfo", storedUserInfo);
 
         const parsedUserInfo = JSON.parse(storedUserInfo);
         dispatch({ type: reducerCases.SET_USER_INFO, userInfo: parsedUserInfo });
