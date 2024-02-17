@@ -10,9 +10,12 @@ export const checkUser = async (request, response, next) => {
         const prisma = getPrismaInstance();
         const user = await prisma.user.findFirst({ where: { eId, password } });
 
-        console.log("user in server ", user);
+        console.log("user in server ", user.eId);
         if (!user) {
             return response.json({ msg: "User not found", status: false });
+        } else if(!user.isActive){
+          return response.json({ msg: "User not found", status: false });
+
         } else {
             return response.json({ msg: "User found", status: true, data: user });
         }

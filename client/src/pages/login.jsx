@@ -37,6 +37,7 @@ export default function Login() {
           console.log("user exists");
           
           localStorage.setItem('userInfo', JSON.stringify(data.data.data));
+          localStorage.setItem('userPassword', JSON.stringify(password));
 
           if(data.data.data.onBoarding == 0){
             console.log("First time onBoarding");
@@ -87,7 +88,7 @@ export default function Login() {
     <Lottie animationData={animationdata}></Lottie>
     </div>
     <form onSubmit={handleLogin}>
-        <h1>I N T R A S H A R E</h1>
+        <h1 style={{width: "323px"}}>I N T R A S H A R E</h1>
         <h2>L O G I N</h2>
         <div className="input-box">
         <input type="text"  placeholder="Employee ID" name="eid"  

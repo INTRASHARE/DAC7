@@ -11,7 +11,7 @@ const generateUsers = (count) => {
       email: faker.internet.email(),
       name: faker.name.findName(),
       profilePicture: "/default_avatar.png",
-      about: faker.lorem.sentence(),
+      about: "available",
     };
 
     users.push(user);

@@ -10,16 +10,19 @@ import { useRouter } from "next/router";
 export default function Admin() {
   const [loading, setLoading] = useState(true);
 
-  //console.log("userinfo",localStorage);
-  const isAdmin = true//userInfo.isAdmin;  
   const router = useRouter();
 
   useEffect(() => {
     const redirectIfNotLoggedIn = async () => {
-      console.log("isAdmin", isAdmin);
       try {
-        const storedUserInfo = localStorage.getItem("userInfo");
-        if (!storedUserInfo || storedUserInfo === "undefined" || isAdmin == 0) {
+
+        const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+        if (!storedUserInfo || storedUserInfo === "undefined") {
+          await router.push("/");
+          return;
+        }
+        if( storedUserInfo.isAdmin == 0){
           await router.push("/");
           return;
         }

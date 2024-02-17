@@ -18,7 +18,7 @@ export default function OnBoarding() {
 
   const [image, setImage] = useState("/default_avatar.png");
   const [name, setName] = useState(userInfo?.name || "");
-  const [about, setAbout] = useState("");
+  const [about, setAbout] = useState(userInfo?.about || "");
 
   useEffect(() => {
 
@@ -80,7 +80,9 @@ export default function OnBoarding() {
             name,
             email,
             profilePicture : image,
-            status: about,}));
+            status: about,
+            isAdmin
+          }));
           console.log("userinfo", userInfo);
           console.log("localstogare", localStorage.userInfo);
 

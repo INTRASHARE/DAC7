@@ -11,6 +11,7 @@ import { GET_MESSAGES_ROUTE, HOST } from "@/utils/ApiRoutes";
 import Empty from "./Empty";
 import LoadingSpinner from "./common/LoadingSpinner";
 import SearchMessages from "./Chat/SearchMessages";
+import { CHECK_USER_ROUTE } from "@/utils/ApiRoutes";
 
 export default function Main() {
   const [
@@ -33,20 +34,26 @@ export default function Main() {
   useEffect(() => {
     const redirectIfNotLoggedIn = async () => {
       try {
-        const storedUserInfo = localStorage.getItem('userInfo');
-        if (!storedUserInfo || storedUserInfo === 'undefined') {
+
+        const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+        console.log("storedUserInfo.isActive", storedUserInfo.isActive);
+        if (!storedUserInfo || storedUserInfo === "undefined") {
           await router.push("/login");
           return;
-        } 
+        }
+        if(!storedUserInfo.isActive){
+          await router.push("/logout");
+          return;
+        }
 
         console.log("storedUserInfo", storedUserInfo);
 
-        const parsedUserInfo = JSON.parse(storedUserInfo);
-        dispatch({ type: reducerCases.SET_USER_INFO, userInfo: parsedUserInfo });
+        dispatch({ type: reducerCases.SET_USER_INFO, userInfo: storedUserInfo });
 
           setLoading(false);
           socket.current = io(HOST);
-          socket.current.emit("add-user", parsedUserInfo.id);
+          socket.current.emit("add-user", storedUserInfo.id);
           dispatch({ type: reducerCases.SET_SOCKET, socket });
 
       } catch (error) {
@@ -56,6 +63,28 @@ export default function Main() {
 
     redirectIfNotLoggedIn();
   }, []);
+
+  useEffect(() => {
+    const redirectIfNotActive = async () => {
+      try {
+        const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+        const storedPassword = JSON.parse(localStorage.getItem('userPassword'));
+        const eId = storedUserInfo.eId;
+        const data = await axios.post(CHECK_USER_ROUTE, { eId, storedPassword });
+
+        console.log("redirectIfNotActive", data);
+        if (!data.data.status) {
+          await router.push("/logout");
+          return;
+        }
+
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    redirectIfNotActive();
+    }, []);
 
   useEffect(() => {
     if (socket.current && !socketEvent) {
