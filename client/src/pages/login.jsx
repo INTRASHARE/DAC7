@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { reducerCases } from "@/context/constants";
 import { CHECK_USER_ROUTE } from "@/utils/ApiRoutes";
 
-
 import dynamic from "next/dynamic";
 //import Lottie from "lottie-react";
 import animationdata from "../components/common/animation.json";
