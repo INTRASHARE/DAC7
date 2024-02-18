@@ -34,22 +34,23 @@ export default function Main() {
   useEffect(() => {
     const redirectIfNotLoggedIn = async () => {
       try {
-
         const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+        const password = JSON.parse(localStorage.getItem('userPassword'));
+        const eId = storedUserInfo.eId;
+        const data = await axios.post(CHECK_USER_ROUTE, { eId, password });
 
+        dispatch({ type: reducerCases.SET_USER_INFO, userInfo: storedUserInfo });
         console.log("storedUserInfo.isActive", storedUserInfo.isActive);
         if (!storedUserInfo || storedUserInfo === "undefined") {
           await router.push("/login");
           return;
         }
-        if(!storedUserInfo.isActive){
+        if(!data.data.status){
           await router.push("/logout");
           return;
         }
 
         console.log("storedUserInfo", storedUserInfo);
-
-        dispatch({ type: reducerCases.SET_USER_INFO, userInfo: storedUserInfo });
 
           setLoading(false);
           socket.current = io(HOST);
@@ -63,36 +64,6 @@ export default function Main() {
 
     redirectIfNotLoggedIn();
   }, []);
-
-  useEffect(() => {
-    const redirectIfNotActive = async () => {
-      try {
-        const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
-        const password = JSON.parse(localStorage.getItem('userPassword'));
-        const eId = storedUserInfo.eId;
-
-        console.log("eId, storedPassword", eId, password);
-
-        if (eId && password) {
-          console.log("eId, storedPassword", eId, password);
-
-          const data = await axios.post(CHECK_USER_ROUTE, { eId, password });
-
-
-        console.log("redirectIfNotActive", data);
-        if (!data.data.status) {
-          await router.push("/logout");
-          return;
-        }
-      }
-
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    redirectIfNotActive();
-    }, []);
 
   useEffect(() => {
     if (socket.current && !socketEvent) {

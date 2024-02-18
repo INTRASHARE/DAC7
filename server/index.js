@@ -29,10 +29,22 @@ const server = app.listen(process.env.PORT, () => {
     },
   });
 
-  global.onlineUsers = new Map();
+
+
+  // creating a global variable onlineUsers to store all online users
+  global.onlineUsers = new Map();  
+
+  // socket.io function to create a listner on connection, whenever a new connection is setup
+  // this block of code will execute
 io.on("connection", (socket) => {
+
+  // creating a global variable chatSocket 
   global.chatSocket = socket;
+
+  // creating a event listner on add-user this event is being called from main and admin and sever/index files
   socket.on("add-user", (userId) => {
+
+    // 
     onlineUsers.set(userId, socket.id);
     socket.broadcast.emit("online-users", {
       onlineUsers: Array.from(onlineUsers.keys()),

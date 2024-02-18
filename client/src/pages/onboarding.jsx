@@ -101,7 +101,7 @@ export default function OnBoarding() {
   const validateDetails = () => {
     if (name.length < 3) {
       // Toast Notification
-      alert("enter name");
+      alert("enter name, it should be 3 letter long atleast");
       return false;
     } else if(password.length < 6){
       alert("Password should be atleast 6 digit long");

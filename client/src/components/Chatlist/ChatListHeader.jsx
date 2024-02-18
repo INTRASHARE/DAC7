@@ -19,7 +19,7 @@ export default function ChatListHeader() {
 
   const showContextMenu = (e) => {
     e.preventDefault();
-    setContextMenuCoordinates({ x: e.pageX, y: e.pageY });
+    setContextMenuCoordinates({ x: e.pageX -69 , y: e.pageY + 20 });
     setIsContextMenuVisible(true);
   };
 

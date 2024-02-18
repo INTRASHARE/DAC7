@@ -28,7 +28,7 @@ export default function Admin() {
 
         setLoading(false);
         socket.current = io(HOST);
-        socket.current.emit("add-user", parsedUserInfo.id);
+        socket.current.emit("add-user", storedUserInfo.id);
         dispatch({ type: reducerCases.SET_SOCKET, socket });
       } catch (error) {
         console.error("Error fetching data:", error);

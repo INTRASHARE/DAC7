@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BsEmojiSmile } from "react-icons/bs";
-import { ImAttachment } from "react-icons/im";
+import { FaImage } from "react-icons/fa6";
+import { IoDocumentAttach } from "react-icons/io5";
 import { FaMicrophone } from "react-icons/fa";
 import { MdSend } from "react-icons/md";
 import { useStateProvider } from "@/context/StateContext";
@@ -155,9 +156,9 @@ export default function MessageBar() {
                 <EmojiPicker onEmojiClick={handleEmojiClick} theme="dark" />
               </div>
             )}
-            <ImAttachment
+            <IoDocumentAttach
               className="text-panel-header-icon cursor-pointer text-xl"
-              title="Attach"
+              title="document"
               onClick={() => setGrabImage(true)}
             />
           </div>

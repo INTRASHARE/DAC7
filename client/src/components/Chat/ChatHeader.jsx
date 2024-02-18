@@ -38,7 +38,7 @@ export default function ChatHeader() {
         <Avatar type="sm" image={currentChatUser?.profilePicture} />
         <div className="flex flex-col">
           <span className="text-primary-strong">{currentChatUser?.name}</span>
-          <span className="text-secondary text-sm">
+          <span className="text-white text-sm">
             {onlineUsers.includes(currentChatUser.id) ? "online" : "offline"}
           </span>
         </div>
