@@ -1,4 +1,5 @@
 import getPrismaInstance from "../utils/PrismaClient.js";
+import { copyData } from '../cronjob.js';
 
 export const AdminGetAllUsers = async (req, res) => {
   try {
@@ -9,7 +10,6 @@ export const AdminGetAllUsers = async (req, res) => {
       isActive: 1
     }
    });
-   //const users = await prisma.$executeRaw`SELECT * FROM user WHERE isActive = 1`;
 
     res.json(users);
   } catch (error) {
@@ -51,5 +51,16 @@ export const deleteUser = async (req, res) => {
   } catch (error) {
     console.error('Error deleting user:', error);
     res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+export const cronUser = async (req, res) => {
+  try {
+      console.log('Running cron job...');
+      await copyData(); // Execute the cron job
+      res.status(200).send('Cron job executed successfully');
+  } catch (error) {
+      console.error('Error running cron job:', error);
+      res.status(500).send('Internal server error');
   }
 };

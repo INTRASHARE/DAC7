@@ -8,8 +8,8 @@ import {
 import {
   AdminGetAllUsers,
   updateUser,
-  deleteUser
-
+  deleteUser,
+  cronUser
 } from "../controllers/AdminController.js"
 
 const router = Router();
@@ -31,5 +31,7 @@ router.put('/updateUser/:id', updateUser);
 
 // Route handler to delete a user
 router.delete('/deleteUser/:id',deleteUser);
+
+router.post('/cronUser',cronUser);
 
 export default router;

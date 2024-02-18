@@ -68,15 +68,23 @@ export default function Main() {
     const redirectIfNotActive = async () => {
       try {
         const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
-        const storedPassword = JSON.parse(localStorage.getItem('userPassword'));
+        const password = JSON.parse(localStorage.getItem('userPassword'));
         const eId = storedUserInfo.eId;
-        const data = await axios.post(CHECK_USER_ROUTE, { eId, storedPassword });
+
+        console.log("eId, storedPassword", eId, password);
+
+        if (eId && password) {
+          console.log("eId, storedPassword", eId, password);
+
+          const data = await axios.post(CHECK_USER_ROUTE, { eId, password });
+
 
         console.log("redirectIfNotActive", data);
         if (!data.data.status) {
           await router.push("/logout");
           return;
         }
+      }
 
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -22,7 +22,7 @@ async function checkDatabaseExists(databaseName) {
 }
 
 
-async function copyData() {
+export async function copyData() {
     try {
 
         const sourceDatabaseExists = await checkDatabaseExists(database);
@@ -57,12 +57,12 @@ async function copyData() {
     }
 }
 
-async function  runCronJob(){
-  console.log('Running cron job...');
-  await copyData();
-}
+// async function  runCronJob(){
+//   console.log('Running cron job...');
+//   await copyData();
+// }
 
-runCronJob();
+// runCronJob();
 
 // cron.schedule('0 10 * * *', async () => {
 //     console.log('Running cron job...');

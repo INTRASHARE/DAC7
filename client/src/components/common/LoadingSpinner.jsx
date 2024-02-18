@@ -1,6 +1,9 @@
 import React from "react";
-import Lottie from "lottie-react";
+// import Lottie from "lottie-react";
+import  dynamic from"next/dynamic";
 import loading_animation from "./loading_animation.json" ;
+
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
 const LoadingSpinner = () => {
   return (

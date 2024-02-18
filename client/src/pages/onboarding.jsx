@@ -19,6 +19,7 @@ export default function OnBoarding() {
   const [image, setImage] = useState("/default_avatar.png");
   const [name, setName] = useState(userInfo?.name || "");
   const [about, setAbout] = useState(userInfo?.about || "");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
 
@@ -52,6 +53,8 @@ export default function OnBoarding() {
         const base64Response = await fetch(`${image}`);
         const blob = await base64Response.blob();
         setImage(await resizeFile(blob));
+
+        localStorage.setItem('userPassword', JSON.stringify(password));
         const { data } = await axios.post(onBoardUserRoute, {
           id,
           eId,
@@ -59,6 +62,7 @@ export default function OnBoarding() {
           name,
           about,
           image,
+          password,
         });
         if (data.status) {
           dispatch({ type: reducerCases.SET_NEW_USER, newUser: false });
@@ -97,6 +101,10 @@ export default function OnBoarding() {
   const validateDetails = () => {
     if (name.length < 3) {
       // Toast Notification
+      alert("enter name");
+      return false;
+    } else if(password.length < 6){
+      alert("Password should be atleast 6 digit long");
       return false;
     }
     return true;
@@ -116,6 +124,7 @@ export default function OnBoarding() {
         <div className="flex flex-col items-center justify-between mt-5 gap-6">
           <Input name="Display Name" state={name} setState={setName} label />
           <Input name="About" state={about} setState={setAbout} label />
+          <Input name="New Password" state={password} setState={setPassword} label />
           <div className="flex items-center justify-center">
             <button
               className="bg-search-input-container-background p-5 rounded-lg"

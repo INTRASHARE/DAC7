@@ -61,8 +61,8 @@ const AdminContainer = () => {
   };
 
   return (
-    <div className="container mx-auto mt-8 text-white">
-      <h2 className="text-2xl font-bold mb-4">Employee List</h2>
+    <div style={{ backgroundColor: 'rgb(247, 239, 224)', marginTop: '0rem' }} className="container mx-auto  pr-2 mt-8 text-gray-800 "> {/* Changed text color */}
+
       <table className="min-w-full">
         <thead>
           <tr>
@@ -75,7 +75,7 @@ const AdminContainer = () => {
         <tbody>
           {users.map(user => (
             <tr key={user.eId} className="border-b py-2">
-              <td className="text-left px-2">{user.eId}</td>
+              <td className="text-center px-2">{user.eId}</td>
               <td className="text-left px-2">
                 {editedUser.eId === user.eId ? (
                   <input
@@ -133,14 +133,15 @@ const AdminContainer = () => {
                 ) : (
                   <button
                     onClick={() => handleEdit(user)}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                    className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded mr-2"
                   >
                     Edit
                   </button>
                 )}
                 <button
                   onClick={() => handleDelete(user.eId)}
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                  style={{ backgroundColor: '#d96f32', transition: 'background-color 0.3s ease' }}
+                  className="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-orange-600"
                 >
                   Delete
                 </button>

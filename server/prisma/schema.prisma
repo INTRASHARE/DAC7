@@ -13,7 +13,7 @@ datasource db {
 model User {
   id Int @id @default(autoincrement()) 
   eId String @unique
-  password String
+  password String @default("$2b$10$IPKfd5sD2qT2.HrfqC0EPuchQ4aJboIPYCVEro54KbGYl.TGLgZMm")
   email String @unique
   name String
   profilePicture String @default("")

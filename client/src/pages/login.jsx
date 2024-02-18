@@ -37,7 +37,9 @@ export default function Login() {
           console.log("user exists");
           
           localStorage.setItem('userInfo', JSON.stringify(data.data.data));
+          console.log("password", password);
           localStorage.setItem('userPassword', JSON.stringify(password));
+          console.log("localStorage.getItem('userPassword')", localStorage.getItem('userPassword'));
 
           if(data.data.data.onBoarding == 0){
             console.log("First time onBoarding");
@@ -75,6 +77,9 @@ export default function Login() {
         } else {
           console.log("user does not exists");
         }
+      } else{
+        console.log("enter details");
+        alert("enter username and password");
       }
 
     } catch (error) {

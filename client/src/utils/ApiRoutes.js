@@ -5,7 +5,7 @@ const MESSAGES_ROUTE = `${HOST}/api/messages`;
 
 export const deleteUserRoute = `${authRoute}/deleteUser`;
 export const updateUserRoute = `${authRoute}/updateUser`;
-
+export const cronUserRoute = `${authRoute}/cronUser`;
 
 export const getAllUsers = `${authRoute}/getAllUsers`;
 export const onBoardUserRoute = `${authRoute}/onboarduser`;
