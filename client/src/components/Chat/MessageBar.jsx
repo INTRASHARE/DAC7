@@ -137,6 +137,8 @@ export default function MessageBar() {
     }
   };
 
+  // setting the context menu 
+
   return (
     <div className="bg-panel-header-background  h-20 px-4 flex items-center gap-6  relative">
       {!showAudioRecorder && (
@@ -161,6 +163,7 @@ export default function MessageBar() {
               title="document"
               onClick={() => setGrabImage(true)}
             />
+
           </div>
           <div className="w-full rounded-lg h-10 flex items-center">
             <input
