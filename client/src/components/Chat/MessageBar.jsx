@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BsEmojiSmile } from "react-icons/bs";
-import { ImAttachment } from "react-icons/im";
+import { FaImage } from "react-icons/fa6";
+import { IoDocumentAttach } from "react-icons/io5";
 import { FaMicrophone } from "react-icons/fa";
 import { MdSend } from "react-icons/md";
 import { useStateProvider } from "@/context/StateContext";
@@ -136,6 +137,8 @@ export default function MessageBar() {
     }
   };
 
+  // setting the context menu 
+
   return (
     <div className="bg-panel-header-background  h-20 px-4 flex items-center gap-6  relative">
       {!showAudioRecorder && (
@@ -155,11 +158,17 @@ export default function MessageBar() {
                 <EmojiPicker onEmojiClick={handleEmojiClick} theme="dark" />
               </div>
             )}
-            <ImAttachment
+            <FaImage
               className="text-panel-header-icon cursor-pointer text-xl"
-              title="Attach"
+              title="image"
               onClick={() => setGrabImage(true)}
             />
+            <IoDocumentAttach
+              className="text-panel-header-icon cursor-pointer text-xl"
+              title="document"
+              // onClick={() => function to attact document  }
+            />
+
           </div>
           <div className="w-full rounded-lg h-10 flex items-center">
             <input
