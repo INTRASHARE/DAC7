@@ -158,15 +158,10 @@ export default function MessageBar() {
                 <EmojiPicker onEmojiClick={handleEmojiClick} theme="dark" />
               </div>
             )}
-            <FaImage
-              className="text-panel-header-icon cursor-pointer text-xl"
-              title="image"
-              onClick={() => setGrabImage(true)}
-            />
             <IoDocumentAttach
               className="text-panel-header-icon cursor-pointer text-xl"
               title="document"
-              // onClick={() => function to attact document  }
+              onClick={() => setGrabImage(true)}
             />
 
           </div>
