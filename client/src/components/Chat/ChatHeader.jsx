@@ -7,7 +7,7 @@ import { reducerCases } from "@/context/constants";
 import ContextMenu from "../common/ContextMenu";
 
 export default function ChatHeader() {
-  const [{ userInfo, currentChatUser, onlineUsers }, dispatch] =
+  const [{ currentChatUser, onlineUsers }, dispatch] =
     useStateProvider();
 
   const [contextMenucoordinates, setContextMenucoordinates] = useState({

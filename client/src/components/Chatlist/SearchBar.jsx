@@ -11,7 +11,7 @@ export default function SearchBar() {
         <div>
           <BiSearchAlt2 className="text-searchbar-text cursor-pointer text-l" />
         </div>
-        <div className="">
+        <div className="" style={{"width": "-moz-available"}}>
           <input
             type="text"
             placeholder="Search or start new chat"

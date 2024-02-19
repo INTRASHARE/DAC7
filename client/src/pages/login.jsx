@@ -18,8 +18,10 @@ export default function Login() {
   const [{ userInfo, newUser }, dispatch] = useStateProvider();
   
   useEffect(() => {
-    console.log({ userInfo });
-    if (userInfo?.id && !newUser) router.push("/");
+    const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
+    
+    console.log({ userInfo, newUser });
+    if (storedUserInfo?.eId && !newUser) router.push("/");
   }, [userInfo, newUser, router]);
 
   const [eId, seteId] = useState('');

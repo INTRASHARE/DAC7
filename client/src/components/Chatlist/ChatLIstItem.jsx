@@ -2,15 +2,22 @@ import React from "react";
 import Avatar from "../common/Avatar";
 import { useStateProvider } from "@/context/StateContext";
 import { reducerCases } from "@/context/constants";
-import { FaCamera, FaMicrophone } from "react-icons/fa";
+import { FaMicrophone } from "react-icons/fa";
 import { calculateTime } from "@/utils/CalculateTime";
 import MessageStatus from "../common/MessageStatus";
+import { IoDocumentAttach } from "react-icons/io5";
+
 
 export default function ChatLIstItem({ data, isContactPage = false }) {
   const [{ userInfo, currentChatUser }, dispatch] = useStateProvider();
 
   const handleContactClick = () => {
-    console.log("function from chat list item", currentChatUser, data, userInfo);
+    console.log(
+      "function from chat list item",
+      currentChatUser,
+      data,
+      userInfo
+    );
     if (currentChatUser?.id === data?.id) {
       return dispatch({ type: reducerCases.SET_ALL_CONTACTS_PAGE });
     }
@@ -82,8 +89,8 @@ export default function ChatLIstItem({ data, isContactPage = false }) {
                   )}
                   {data.type === "image" && (
                     <span className="flex gap-1 items-center">
-                      <FaCamera className="text-panel-header-icon" />
-                      Image
+                      <IoDocumentAttach className="text-panel-header-icon cursor-pointer text-xl" />
+                      File
                     </span>
                   )}
                 </div>

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BsEmojiSmile } from "react-icons/bs";
-import { FaImage } from "react-icons/fa6";
 import { IoDocumentAttach } from "react-icons/io5";
 import { FaMicrophone } from "react-icons/fa";
 import { MdSend } from "react-icons/md";

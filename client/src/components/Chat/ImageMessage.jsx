@@ -36,12 +36,12 @@ function ImageMessage({ message }) {
           />
         ) : (
           <a
-            href={message.message}
+            href={`${HOST}/${message.message}`}
             target="_blank"
             rel="noopener noreferrer"
             download
           >
-            Download File
+            {message.message.substring(28,message.message.length)}
           </a>
         )}
       </span>
