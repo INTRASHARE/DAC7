@@ -19,8 +19,6 @@ const AdminContainer = () => {
     }
   };
 
-  console.log("users", users);
-
   const handleEdit = (user) => {
     setEditedUser(user);
   };

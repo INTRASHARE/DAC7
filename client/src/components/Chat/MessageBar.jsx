@@ -57,8 +57,6 @@ export default function MessageBar() {
 
   const [{ socket, currentChatUser, userInfo }, dispatch] = useStateProvider();
   const sendMessage = async () => {
-    console.log("user infoin message bar: => ");
-    console.log(userInfo);
     try {
       setMessage("");
       const { data } = await axios.post(ADD_MESSAGE_ROUTE, {

@@ -6,7 +6,6 @@ const AdminHeader = () => {
   
   const handleRunCronJob = async () => {
     try {
-      console.log("wearehere");
         await axios.post(`${cronUserRoute}`);
         alert('Cron job executed successfully');
     } catch (error) {

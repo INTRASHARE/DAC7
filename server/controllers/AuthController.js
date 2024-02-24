@@ -47,21 +47,17 @@ async function checkPassword(plainPassword, hashedPassword) {
 export const checkUser = async (request, response, next) => {
   try {
     var { eId, password } = request.body;
-    console.log(eId, password, "eId, password");
     if (!eId) {
       return response.json({ msg: "Employee ID is required", status: false });
     }
     const prisma = getPrismaInstance();
     const user = await prisma.user.findFirst({ where: { eId } });
 
-    console.log("user in server ", user);
     if (!user) {
       return response.json({ msg: "User not found", status: false });
     } else if (!user.isActive) {
       return response.json({ msg: "User not found", status: false });
     } else {
-
-      console.log("password, bcryptPassword", password, user.password);
 
       checkPassword(password, user.password)
     .then(match => {
@@ -82,13 +78,9 @@ export const onBoardUser = async (request, response, next) => {
     var { eId, name, about = "Available", image: profilePicture, password } = request.body;
     const prisma = getPrismaInstance();
 
-    console.log("password",password);
     const saltRounds = 10;
     const bcryptPassword = await hashPassword(password, saltRounds);
-
-    console.log(bcryptPassword);
     
-    console.log(request.body);
     await prisma.user.update({
       where: { eId: eId },
       data: { name, about, profilePicture, onBoarding: 1, password: bcryptPassword }

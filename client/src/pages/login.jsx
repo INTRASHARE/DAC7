@@ -20,7 +20,6 @@ export default function Login() {
   useEffect(() => {
     const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
     
-    console.log({ userInfo, newUser });
     if (storedUserInfo?.eId && !newUser) router.push("/");
   }, [userInfo, newUser, router]);
 
@@ -34,17 +33,12 @@ export default function Login() {
 
       if (eId && password) {
         const data = await axios.post(CHECK_USER_ROUTE, { eId, password });
-        console.log("data from check user", data);
         if (data.data.status) {
-          console.log("user exists");
           
           localStorage.setItem('userInfo', JSON.stringify(data.data.data));
-          console.log("password", password);
           localStorage.setItem('userPassword', JSON.stringify(password));
-          console.log("localStorage.getItem('userPassword')", localStorage.getItem('userPassword'));
 
           if(data.data.data.onBoarding == 0){
-            console.log("First time onBoarding");
             dispatch({ type: reducerCases.SET_NEW_USER, newUser: true });
             dispatch({
               type: reducerCases.SET_USER_INFO,
@@ -60,7 +54,6 @@ export default function Login() {
             });
            router.push("/onboarding");
           } else {
-            console.log("Already onBoarded");
             dispatch({
               type: reducerCases.SET_USER_INFO,
               userInfo: {
@@ -80,7 +73,6 @@ export default function Login() {
           console.log("user does not exists");
         }
       } else{
-        console.log("enter details");
         alert("enter username and password");
       }
 

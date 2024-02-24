@@ -9,7 +9,6 @@ prisma = new PrismaClient();
 
 const dbName = process.env.DATABASE_NAME;
 const database = process.env.DATABASE;
-console.log(`${dbName}`);
 
 async function checkDatabaseExists(databaseName) {
     try {

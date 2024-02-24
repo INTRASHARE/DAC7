@@ -28,8 +28,6 @@ export default function ChatListHeader() {
     window.open('/admin', '_blank');
     setIsContextMenuVisible(false); 
   };
-
-  console.log("isAdmin",isAdmin);
    
   // Ensuring isAdmin is defined and accessible
   const contextMenuOptions = isAdmin ? [

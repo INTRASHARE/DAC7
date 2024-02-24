@@ -22,7 +22,6 @@ export const updateUser = async (req, res) => {
   const userId = parseInt(req.params.id); // Extract the user ID from the request parameters
   const userData = req.body; // Extract the updated user data from the request body
 
-  console.log("updateUser admin", userData);
   try {
     const prisma = getPrismaInstance();
 

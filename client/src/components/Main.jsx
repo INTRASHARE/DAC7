@@ -23,8 +23,6 @@ export default function Main() {
     },
     dispatch,
   ] = useStateProvider(); 
-
-  console.log("userinfo on main page", userInfo);
   
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -35,22 +33,12 @@ export default function Main() {
     const redirectIfNotLoggedIn = async () => {
       try {
         const storedUserInfo = JSON.parse(localStorage.getItem('userInfo'));
-        const password = JSON.parse(localStorage.getItem('userPassword'));
-        const eId = storedUserInfo.eId;
-        const data = await axios.post(CHECK_USER_ROUTE, { eId, password });
 
         dispatch({ type: reducerCases.SET_USER_INFO, userInfo: storedUserInfo });
-        console.log("storedUserInfo.isActive", storedUserInfo.isActive);
         if (!storedUserInfo || storedUserInfo === "undefined") {
           await router.push("/login");
           return;
         }
-        if(!data.data.status){
-          await router.push("/logout");
-          return;
-        }
-
-        console.log("storedUserInfo", storedUserInfo);
 
           setLoading(false);
           socket.current = io(HOST);
